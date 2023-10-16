@@ -12,7 +12,7 @@ namespace ReclutamientoBackend.Controllers.Candidato
             
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public ActionResult GetAllCanditados()
         {
             return Ok(1);

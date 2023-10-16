@@ -16,9 +16,6 @@
     <Folder Include="Dto\Candidato\" />
     <Folder Include="Mappers\CandidatoExperiencia\" />
     <Folder Include="Mappers\Candidato\" />
-    <Folder Include="Repositorios\CandidatoExperiencia\" />
-    <Folder Include="Services\CandidatoExperiencia\" />
-    <Folder Include="Services\Candidato\" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ namespace ReclutamientoBackend.Controllers.ExperienciaExperiencia
                 
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public ActionResult GetAllExperiencia()
         {
             return Ok(1);
