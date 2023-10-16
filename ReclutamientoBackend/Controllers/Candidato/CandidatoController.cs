@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using ReclutamientoBackend.Dto.Candidato;
+using ReclutamientoBackend.Models.Candidato;
+using ReclutamientoBackend.Repositorios.Candidato;
 
 namespace ReclutamientoBackend.Controllers.Candidato
 {
@@ -7,39 +9,86 @@ namespace ReclutamientoBackend.Controllers.Candidato
     [Route("api/[controller]")]
     public class CandidatoController : Controller
     {
-        public CandidatoController()
+        private readonly ICandidatoRepository _candidatoRepository;
+
+        public CandidatoController(ICandidatoRepository candidatoRepository)
         {
-            
+            _candidatoRepository = candidatoRepository;
         }
 
         [HttpGet]
-        public ActionResult GetAllCanditados()
+        public async Task<ActionResult> GetAllCanditados()
         {
-            return Ok(1);
+            try
+            {
+                return Ok(await _candidatoRepository.GetAll());
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { mensaje = "La solicitud fue rechazada debido a datos incorrectos." + ex.Message});
+
+            }
         }
 
         [HttpGet("{id}")]
-        public ActionResult GetCandidato(int id)
+        public async Task<ActionResult> GetCandidato(int id)
         {
-            return Ok(1);
+            try
+            {
+                return Ok(await _candidatoRepository.GetById(id));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { mensaje = "La solicitud fue rechazada debido a datos incorrectos." + ex.Message });
+
+            }
         }
 
         [HttpPost]
-        public ActionResult PostCandidato()
+        public async Task<ActionResult> PostCandidato(CandidatoCreateDto candidatoModel)
         {
-            return Ok(1);
+            try
+            {
+                return Ok(await _candidatoRepository.Create(candidatoModel));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { mensaje = "La solicitud fue rechazada debido a datos incorrectos." + ex.Message });
+
+            }
         }
 
-        [HttpPut]
-        public ActionResult PutCandidato()
+        [HttpPut("{id}")]
+        public async Task<ActionResult> PutCandidato(int id, CandidatoModel candidatoModel)
         {
-            return Ok(1);
+            try
+            {
+                return Ok(await _candidatoRepository.Update(id, candidatoModel));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { mensaje = "La solicitud fue rechazada debido a duplicidad del correo." + ex.Message });
+
+            }
         }
 
-        [HttpDelete]
-        public ActionResult DeleteCandidato()
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCandidato(int id)
         {
-            return Ok(1);
+            try
+            {
+                return Ok(await _candidatoRepository.DeleteById(id));
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(new { mensaje = "La solicitud fue rechazada debido a datos incorrectos." + ex.Message });
+
+            }
         }
 
     }

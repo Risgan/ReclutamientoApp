@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ReclutamientoBackend.Models.Candidato;
+﻿using ReclutamientoBackend.Dto.CandidatoExperiencia;
+using ReclutamientoBackend.Mappers.CandidatoExperiencia;
 using ReclutamientoBackend.Models.CandidatoExperiencia;
-using ReclutamientoBackend.Repositorios.Candidato;
-using ReclutamientoBackend.Repositorios.Repository;
-using ReclutamientoBackend.Services.Candidato;
 using ReclutamientoBackend.Services.CandidatoExperiencia;
 
 namespace ReclutamientoBackend.Repositorios.CandidatoExperiencia
@@ -17,9 +14,9 @@ namespace ReclutamientoBackend.Repositorios.CandidatoExperiencia
             _candidatoExperienciaService = candidatoExperienciaService;
         }
 
-        public async Task<bool> Create(CandidatoExperienciaModel model)
+        public async Task<bool> Create(CandidatoExperienciaCreateDto model)
         {
-            return await _candidatoExperienciaService.Add(model);
+            return await _candidatoExperienciaService.Add(CandidatoExperienciaMapper.MapCreate(model));
         }
 
         public async Task<bool> DeleteById(int id)
@@ -28,15 +25,15 @@ namespace ReclutamientoBackend.Repositorios.CandidatoExperiencia
 
         }
 
-        public async Task<IEnumerable<CandidatoExperienciaModel>> GetAll()
+        public async Task<IEnumerable<CandidatoExperienciaResponseDto>> GetAll()
         {
-            return await _candidatoExperienciaService.GetAll();
+            return CandidatoExperienciaMapper.MapResponse(await _candidatoExperienciaService.GetAll());
 
         }
 
-        public async Task<CandidatoExperienciaModel> GetById(int id)
+        public async Task<CandidatoExperienciaResponseDto> GetById(int id)
         {
-            return await _candidatoExperienciaService.Get(id);
+            return CandidatoExperienciaMapper.MapResponse(await _candidatoExperienciaService.Get(id));
 
         }
 
