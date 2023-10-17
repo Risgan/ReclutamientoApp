@@ -20,9 +20,9 @@ builder.Services.AddDbContext<DbReclutamientoContext>(options =>
 });
 
 builder.Services.AddScoped<ICandidatoService, CandidatoService>();
-//builder.Services.AddScoped<ICandidatoExperienciaService, CandidatoExperienciaService>();
+builder.Services.AddScoped<ICandidatoExperienciaService, CandidatoExperienciaService>();
 builder.Services.AddScoped<ICandidatoRepository, CandidatoRepository>();
-//builder.Services.AddScoped<ICandidatoExperienciaRepository, CandidatoExperienciaRepository>();
+builder.Services.AddScoped<ICandidatoExperienciaRepository, CandidatoExperienciaRepository>();
 
 var app = builder.Build();
 

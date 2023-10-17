@@ -36,7 +36,15 @@ namespace ReclutamientoBackend.Controllers.Candidato
         {
             try
             {
-                return Ok(await _candidatoRepository.GetById(id));
+                if (id != 0)
+                {
+                    return Ok(await _candidatoRepository.GetById(id));
+
+                }
+                else
+                {
+                    return Ok(new CandidatoResponseDto());
+                }
             }
             catch (Exception ex)
             {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ReclutamientoBackend.Dto.Candidato;
 using ReclutamientoBackend.Dto.CandidatoExperiencia;
 using ReclutamientoBackend.Models.CandidatoExperiencia;
 using ReclutamientoBackend.Repositorios.CandidatoExperiencia;
@@ -7,11 +8,11 @@ namespace ReclutamientoBackend.Controllers.ExperienciaExperiencia
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ExperienciaExperienciaController : Controller
+    public class ExperienciaController : Controller
     {
         private readonly ICandidatoExperienciaRepository _candidatoExperienciaRepository;
 
-        public ExperienciaExperienciaController(ICandidatoExperienciaRepository candidatoExperienciaRepository)
+        public ExperienciaController(ICandidatoExperienciaRepository candidatoExperienciaRepository)
         {
             _candidatoExperienciaRepository = candidatoExperienciaRepository;
         }
@@ -36,7 +37,14 @@ namespace ReclutamientoBackend.Controllers.ExperienciaExperiencia
         {
             try
             {
-                return Ok(await _candidatoExperienciaRepository.GetById(id));
+                if (id != 0)
+                {
+                    return Ok(await _candidatoExperienciaRepository.GetById(id));
+                }
+                else
+                {
+                    return Ok(new CandidatoExperienciaResponseDto());
+                }
             }
             catch (Exception ex)
             {

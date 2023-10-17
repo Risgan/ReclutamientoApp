@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ReclutamientoBackend.Models.CandidatoExperiencia
 {
+    [Table("CandidatesExperiences")]
     public class CandidatoExperienciaModel
     {
         [Key]
@@ -22,7 +24,7 @@ namespace ReclutamientoBackend.Models.CandidatoExperiencia
         public string Description { get; set; }
 
         [DisplayName("Salary")]
-        public float Salary { get; set; }
+        public Decimal Salary { get; set; }
 
         [DisplayName("BeginDate")]
         public DateTime BeginDate { get; set; }
